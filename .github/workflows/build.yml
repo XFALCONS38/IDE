@@ -1,0 +1,58 @@
+name: Build IDE (Windows / macOS / Linux)
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Build (Windows)
+        shell: pwsh
+        run: |
+          .\build_windows.ps1
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: IDE-windows
+          path: dist/IDE.exe
+
+  build-linux:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Build (Linux)
+        run: |
+          chmod +x build_linux.sh
+          ./build_linux.sh
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: IDE-linux
+          path: dist/IDE
+
+  build-macos:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Build (macOS)
+        run: |
+          chmod +x build_macos.sh
+          ./build_macos.sh
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: IDE-macos
+          path: dist/IDE
