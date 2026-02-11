@@ -66,6 +66,10 @@ chmod +x build_macos.sh
 ```
 Output: `dist/IDE` (or `.app` depending on PyInstaller config)
 
+## Releases (Recommended)
+Tag a version like `v1.0.0` and push it. GitHub Actions will build all three OS binaries
+and attach them to a GitHub Release automatically.
+
 ## Bundled Compiler Notes
 - **Windows**: w64devkit is bundled automatically (GCC/G++).
 - **Linux**: build script auto-downloads a portable GCC/G++ toolchain from musl.cc.
