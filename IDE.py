@@ -1302,7 +1302,10 @@ void _IDE_PRINT_RESULT() {
             messagebox.showerror("Compiler Error", str(e))
             return False
         self.lbl_status.config(text=f"Compiling {side}...")
-        res = subprocess.run(cmd, capture_output=True, text=True)
+        run_kwargs = {"capture_output": True, "text": True}
+        if os.name == "nt" and hasattr(subprocess, "CREATE_NO_WINDOW"):
+            run_kwargs["creationflags"] = subprocess.CREATE_NO_WINDOW
+        res = subprocess.run(cmd, **run_kwargs)
 
         if res.returncode != 0:
             self.lbl_status.config(text="Compilation Failed")
