@@ -48,6 +48,16 @@ def pick_work_dir():
 WORK_DIR = pick_work_dir()
 os.makedirs(WORK_DIR, exist_ok=True)
 
+LOCAL_COMPILER_DIR = os.path.join(WORK_DIR, "compiler")
+PROJECTS_DIR = os.path.join(WORK_DIR, "projects")
+TEMP_SOURCE_FILE_CPP = os.path.join(WORK_DIR, "temp_code.cpp")
+TEMP_SOURCE_FILE_C = os.path.join(WORK_DIR, "temp_code.c")
+TEMP_SOURCE_FILE_CPP_RIGHT = os.path.join(WORK_DIR, "temp_code_right.cpp")
+TEMP_SOURCE_FILE_C_RIGHT = os.path.join(WORK_DIR, "temp_code_right.c")
+EXE_SUFFIX = ".exe" if os.name == "nt" else ""
+TEMP_EXE_FILE = os.path.join(WORK_DIR, f"temp_code{EXE_SUFFIX}")
+TEMP_EXE_FILE_RIGHT = os.path.join(WORK_DIR, f"temp_code_right{EXE_SUFFIX}")
+
 BUNDLED_COMPILER_ZIP_NAMES = {
     "win32": ["w64devkit.zip", "w64devkit-1.20.0.zip"],
     "linux": ["toolchain-linux.zip", "compiler-linux.zip"],
@@ -91,15 +101,6 @@ def iter_bundled_compiler_bin_candidates():
             yield path
 
 os.makedirs(PROJECTS_DIR, exist_ok=True)
-LOCAL_COMPILER_DIR = os.path.join(WORK_DIR, "compiler")
-PROJECTS_DIR = os.path.join(WORK_DIR, "projects")
-TEMP_SOURCE_FILE_CPP = os.path.join(WORK_DIR, "temp_code.cpp")
-TEMP_SOURCE_FILE_C = os.path.join(WORK_DIR, "temp_code.c")
-TEMP_SOURCE_FILE_CPP_RIGHT = os.path.join(WORK_DIR, "temp_code_right.cpp")
-TEMP_SOURCE_FILE_C_RIGHT = os.path.join(WORK_DIR, "temp_code_right.c")
-EXE_SUFFIX = ".exe" if os.name == "nt" else ""
-TEMP_EXE_FILE = os.path.join(WORK_DIR, f"temp_code{EXE_SUFFIX}")
-TEMP_EXE_FILE_RIGHT = os.path.join(WORK_DIR, f"temp_code_right{EXE_SUFFIX}")
 BENCHMARK_DEFAULT_RUNS = 10
 RUN_BUTTON_TEXT = "Run & Measure Algo Time"
 
